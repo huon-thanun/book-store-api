@@ -42,5 +42,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+        if ($this->command) {
+            $this->command->info('Database seeding completed successfully.');
+        }
     }
 }
