@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('book_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('book_id')->constrained()->cascadeOnDelete();
-            $table->string('publisher');
+            $table->text('publisher');
             $table->string('language')->default('Khmer');
             $table->integer('page_count');
             $table->timestamps();
