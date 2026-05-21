@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,13 +21,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        Schema::disableForeignKeyConstraints();
+
+        DB::table('book_details')->truncate();
+        DB::table('books')->truncate();
+        DB::table('authors')->truncate();
+        DB::table('categories')->truncate();
+        DB::table('users')->truncate();
+
+        Schema::enableForeignKeyConstraints();
+
         // Stage 1: Create master data (Authors and Categories)
         $authors = Author::factory(5)->create();
         $categories = Category::factory(5)->create();
 
-        // Stage 2-4: Create 20 books with related book details
-        for ($i = 0; $i < 20; $i++) {
-            // Stage 3: Create a book with random author_id and category_id
+        // Stage 2-4: Create books with related book details
+        for ($i = 0; $i < 10; $i++) {
             $book = Book::factory()->create([
                 'author_id' => $authors->random()->id,
                 'category_id' => $categories->random()->id,

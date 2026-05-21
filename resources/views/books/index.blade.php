@@ -4,68 +4,55 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Books Table</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     <style>
+        :root {
+            --bg-soft: #f4f7ee;
+            --bg-mesh-a: rgba(230, 110, 48, 0.16);
+            --bg-mesh-b: rgba(13, 110, 120, 0.14);
+            --panel: #ffffff;
+            --ink: #16222d;
+            --muted: #647481;
+            --brand: #d65f2a;
+            --brand-2: #0f7d74;
+            --line: #e7ecdf;
+        }
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Outfit', sans-serif;
             min-height: 100vh;
-        }
-        .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3rem 0;
-            margin-bottom: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
-        }
-        .stat-card {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            color: white;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-        .stat-card:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-5px);
-        }
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 0.5rem 0;
-        }
-        .stat-label {
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            opacity: 0.9;
+            background:
+                radial-gradient(circle at 10% 10%, var(--bg-mesh-a), transparent 40%),
+                radial-gradient(circle at 85% 20%, var(--bg-mesh-b), transparent 40%),
+                var(--bg-soft);
         }
         .table-container {
-            background: white;
-            border-radius: 1rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            background: var(--panel);
+            border-radius: 1.1rem;
+            box-shadow: 0 18px 45px rgba(19, 36, 43, 0.12);
             overflow: hidden;
+            border: 1px solid rgba(22, 34, 45, 0.06);
         }
         .table-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: linear-gradient(120deg, var(--brand), var(--brand-2));
         }
         .table-header h5 {
             margin: 0;
-            font-weight: 600;
-            font-size: 1.5rem;
+            font-weight: 700;
+            font-size: 1.35rem;
+            letter-spacing: 0.02em;
         }
         .table thead th {
-            background: #f8f9fa;
-            color: #495057;
+            background: #f8fbf3;
+            color: #4b5c64;
             font-weight: 600;
             text-transform: uppercase;
             font-size: 0.75rem;
@@ -74,45 +61,38 @@
             padding: 1rem;
         }
         .table tbody tr {
-            border-bottom: 1px solid #e9ecef;
-            transition: all 0.2s ease;
+            border-bottom: 1px solid var(--line);
+            transition: all 0.25s ease;
         }
         .table tbody tr:hover {
-            background-color: #f8f9fa;
-            box-shadow: inset 0 0 10px rgba(102, 126, 234, 0.05);
+            background-color: #f9fcf5;
+            box-shadow: inset 0 0 0 999px rgba(214, 95, 42, 0.03);
         }
         .table tbody td {
             padding: 1rem;
             vertical-align: middle;
+            color: var(--ink);
         }
         .book-title {
             font-weight: 600;
-            color: #2d3748;
+            color: var(--ink);
             margin-bottom: 0.25rem;
         }
         .book-date {
             font-size: 0.875rem;
-            color: #718096;
+            color: var(--muted);
         }
         .price-badge {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 0.5rem 0.75rem;
             border-radius: 0.5rem;
             font-weight: 600;
             display: inline-block;
+            background: linear-gradient(120deg, var(--brand), #ee8a2b);
         }
         .category-badge {
-            background: #e7f5ff;
-            color: #1971c2;
-            padding: 0.35rem 0.75rem;
-            border-radius: 0.5rem;
-            font-weight: 500;
-            font-size: 0.875rem;
-        }
-        .language-badge {
-            background: #f0fdf4;
-            color: #166534;
+            background: #e8f8f6;
+            color: #0f7d74;
             padding: 0.35rem 0.75rem;
             border-radius: 0.5rem;
             font-weight: 500;
@@ -121,19 +101,48 @@
         .empty-state {
             text-align: center;
             padding: 3rem 1rem;
-            color: #718096;
+            color: var(--muted);
         }
         .empty-state i {
             font-size: 3rem;
-            color: #cbd5e0;
+            color: #c2ccbf;
             margin-bottom: 1rem;
+        }
+        .create-btn {
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            color: #ffffff;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.14);
+        }
+        .create-btn:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.24);
+        }
+        .btn-edit {
+            background: #ecb130;
+            border-color: #ecb130;
+            color: #ffffff;
+        }
+        .btn-edit:hover {
+            background: #d99f25;
+            border-color: #d99f25;
+            color: #ffffff;
         }
     </style>
 </head>
-<body>
+<body class="bg-light">
     <div class="container-fluid py-4">
+        @if (session('success'))
+            <div class="container mb-3">
+                <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        @endif
+
         <!-- Hero Section -->
-        <div class="hero-section">
+        <!-- <div class="hero-section">
             <div class="container">
                 <div class="row mb-4">
                     <div class="col-md-8">
@@ -150,7 +159,6 @@
                     </div>
                 </div>
                 
-                <!-- Stats Cards -->
                 <div class="row g-3">
                     <div class="col-md-3">
                         <div class="stat-card">
@@ -182,14 +190,19 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- Table -->
         <div class="container">
             <div class="table-container">
                 <div class="table-header">
                     <h5><i class="bi bi-list-ul"></i> Complete Book List</h5>
-                    <span class="badge bg-light text-dark">{{ $totalBooks ?? 0 }} entries</span>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="badge text-bg-light">{{ $totalBooks ?? 0 }} entries</span>
+                        <a href="{{ route('books.ui.create') }}" class="btn create-btn btn-md">
+                            <i class="bi bi-plus-circle"></i> Create Book
+                        </a>
+                    </div>
                 </div>
 
                 <div class="table-responsive">
@@ -201,16 +214,15 @@
                             <th>Author</th>
                             <th>Category</th>
                             <th class="text-end">Price</th>
-                            <th>Language</th>
-                            <th class="text-end">Pages</th>
                             <th>Description</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($books as $book)
                             <tr>
                                 <td>
-                                    <span class="badge bg-primary">{{ $book->id }}</span>
+                                    <span class="badge" style="background-color: #0f7d74;">{{ $book->id }}</span>
                                 </td>
                                 <td>
                                     <div class="book-title"><i class="bi bi-book"></i> {{ $book->title }}</div>
@@ -225,23 +237,31 @@
                                 <td class="text-end">
                                     <div class="price-badge">${{ number_format((float) $book->price, 2) }}</div>
                                 </td>
-                                <td>
-                                    <span class="language-badge"><i class="bi bi-globe"></i> {{ $book->bookDetail?->language ?? 'N/A' }}</span>
+                                <td style="max-width: 300px;">
+                                    <small>{{ \Illuminate\Support\Str::limit($book->bookDetail?->description ?? $book->description ?? 'No description available.', 60) }}</small>
                                 </td>
                                 <td class="text-center">
-                                    <span class="badge bg-secondary">{{ $book->bookDetail?->page_count ?? '0' }}</span>
-                                </td>
-                                <td style="max-width: 300px;">
-                                    <small>{{ Str::limit($book->bookDetail?->description ?? $book->description ?? 'No description available.', 60) }}</small>
+                                    <div class="" role="group">
+                                        <a href="{{ route('books.ui.edit', $book->id) }}" class="btn btn-edit w-100 fw-semibold mb-2">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                        <form action="{{ route('books.ui.destroy', $book->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this book?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger w-100 text-white fw-semibold">
+                                                <i class="bi bi-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8">
+                                <td colspan="7">
                                     <div class="empty-state">
                                         <i class="bi bi-inbox"></i>
                                         <h5>No books found</h5>
-                                        <p>Please run the seeders to populate the database.</p>
+                                        <p>Use the create button to add the first book.</p>
                                     </div>
                                 </td>
                             </tr>
